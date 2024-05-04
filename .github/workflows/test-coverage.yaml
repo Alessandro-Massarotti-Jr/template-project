@@ -5,9 +5,9 @@ on:
     branches:
       - main
       - develop
-      
+
 jobs:
-  code-coverage:
+  test-coverage:
     runs-on: ubuntu-latest
     strategy:
       matrix:
