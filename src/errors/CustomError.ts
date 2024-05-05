@@ -5,7 +5,7 @@ export class CustomError extends Error {
   public location: string;
   public message: string;
   public method: string;
-  protected httpStatusCode: Enum.HttpStatusCode;
+  public httpStatusCode: Enum.HttpStatusCode;
 
   constructor({ location, method }: Type.CustomErrorConstructor) {
     super();
