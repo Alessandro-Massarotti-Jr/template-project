@@ -9,7 +9,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["typescript","@typescript-eslint"],
+  "plugins": ["typescript", "@typescript-eslint"],
   "rules": {
     "no-const-assign": "error",
     "no-class-assign": "error",
