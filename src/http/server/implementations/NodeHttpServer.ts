@@ -4,6 +4,7 @@ import { CustomError } from '../../../errors/CustomError';
 import { Enum } from '../../../types';
 import { Router } from '../../routes/Router';
 import { logger } from '../../../utilities/Logger';
+import { ServerConfigurationError } from '../../../errors/ServerConfigurationError';
 
 export class NodeHttpServer implements IServer {
   private server: http.Server;
@@ -18,7 +19,10 @@ export class NodeHttpServer implements IServer {
       req.on('end', async () => {
         try {
           if (!this.router) {
-            throw new Error('');
+            throw new ServerConfigurationError({
+              location: __filename,
+              method: 'constructor',
+            });
           }
 
           const response = await this.router.handleRequest({
@@ -59,5 +63,13 @@ export class NodeHttpServer implements IServer {
   }
   listen(port: number, callback: () => void): void {
     this.server.listen(port, callback);
+  }
+
+  close() {
+    this.server.close();
+  }
+
+  getServerInstance() {
+    return this.server;
   }
 }
