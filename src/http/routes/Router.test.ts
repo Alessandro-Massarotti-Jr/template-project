@@ -4,7 +4,9 @@ import { RouteMethodNotAllowedError } from '../../errors/RouteMethodNotAllowedEr
 import { RouteNotFoundError } from '../../errors/RouteNotFoundError';
 import { Enum } from '../../types';
 import { Request } from '../requests/Request';
-import { router } from './Router';
+import { Router } from './Router';
+
+const router = Router.getInstance();
 
 beforeEach(() => {
   jest.resetAllMocks();

@@ -3,6 +3,7 @@ import { InvalidUrlError } from '../../errors/InvalidUrlError';
 import { RouteMethodNotAllowedError } from '../../errors/RouteMethodNotAllowedError';
 import { RouteNotFoundError } from '../../errors/RouteNotFoundError';
 import { Enum } from '../../types';
+import { logger } from '../../utilities/Logger';
 import { Body, Headers, Request, Response } from '../requests/Request';
 import { Route } from './Route';
 
@@ -13,11 +14,17 @@ type HandleRequestDTO = {
   headers: Headers;
 };
 
-class Router {
+export class Router {
   // eslint-disable-next-line no-use-before-define
   public static instance: Router;
   private routes: Route[] = [];
   private registeredPaths: string[] = [];
+
+  private constructor() {
+    logger.info({
+      message: 'Router initializing',
+    });
+  }
 
   public static getInstance(): Router {
     if (!this.instance) {
@@ -168,7 +175,3 @@ class Router {
     return this.registeredPaths.sort();
   }
 }
-
-const router = Router.getInstance();
-
-export { router };

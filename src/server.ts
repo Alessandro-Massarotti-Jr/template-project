@@ -1,21 +1,30 @@
 import 'dotenv/config';
-import cors from 'cors';
-import express, { NextFunction, Request, Response } from 'express';
-import { CustomError } from './errors/CustomError';
+import { NodeHttpServer } from './http/server/implementations/NodeHttpServer';
+import { Router } from './http/routes/Router';
+import { Request } from './http/requests/Request';
+import { Enum } from './types';
 
-const server = express();
-server.use(express.json());
-server.use(cors());
+const router = Router.getInstance();
+router.get('/', [
+  (request: Request) => {
+    request.setResponse({
+      data: {},
+      httpStatusCode: Enum.HttpStatusCode.OK,
+      message: 'Running...',
+    });
+  },
+]);
 
-server.use((error: any, request: Request, response: Response, next: NextFunction) => {
-  if (error instanceof CustomError) {
-    return response.status(error.httpStatusCode).json(error.toJson());
-  }
-  const customError = new CustomError({
-    location: __filename,
-    method: 'handle',
-  });
-  return response.status(customError.httpStatusCode).json(customError.toJson());
-});
+router.post('/user/:uid/product/:productId', [
+  (request: Request) => {
+    request.setResponse({
+      data: { ...request.getBody(), ...request.getPathParams(), ...request.getQueryParams() },
+      httpStatusCode: Enum.HttpStatusCode.OK,
+      message: 'teste',
+    });
+  },
+]);
 
+const server = new NodeHttpServer();
+server.setRouter(router);
 export { server };
