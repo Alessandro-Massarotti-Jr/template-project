@@ -6,6 +6,7 @@ export class CustomError extends Error {
   public message: string;
   public method: string;
   public httpStatusCode: Enum.HttpStatusCode;
+  public isIgnorable?: boolean;
 
   constructor({ location, method }: Type.CustomErrorConstructor) {
     super();
@@ -14,6 +15,7 @@ export class CustomError extends Error {
     this.httpStatusCode = Enum.HttpStatusCode.INTERNAL_SERVER_ERROR;
     this.location = location;
     this.method = method;
+    this.isIgnorable = false;
   }
 
   public toJson() {

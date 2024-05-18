@@ -25,7 +25,7 @@ export type RequetDTO = {
 
 export type Response = {
   httpStatusCode: Enum.HttpStatusCode;
-  message: string;
+  message?: string;
   data: any;
 };
 
