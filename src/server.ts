@@ -1,8 +1,8 @@
 import 'dotenv/config';
-import { NodeHttpServer } from './http/server/implementations/NodeHttpServer';
 import { Router } from './http/routes/Router';
 import { Request } from './http/requests/Request';
 import { Enum } from './types';
+import { ExpressHttpServer } from './http/server/implementations/ExpressHttpServer';
 
 const router = Router.getInstance();
 router.get('/', [
@@ -25,6 +25,6 @@ router.post('/user/:uid/product/:productId', [
   },
 ]);
 
-const server = new NodeHttpServer();
+const server = new ExpressHttpServer();
 server.setRouter(router);
 export { server };
