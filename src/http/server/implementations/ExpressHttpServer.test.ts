@@ -33,7 +33,7 @@ describe('ExpressHttpServer unit test', () => {
     ]);
 
     server.setRouter(router);
-    server.listen(3000, () => {
+    server.listen(3003, () => {
       return;
     });
     await request(server.getServerInstance()).get('/express-test?search=teste');
@@ -66,7 +66,7 @@ describe('ExpressHttpServer unit test', () => {
       },
     ]);
     server.setRouter(router);
-    server.listen(3000, () => {
+    server.listen(3004, () => {
       return;
     });
     await request(server.getServerInstance()).get('/express-test-error');
@@ -83,7 +83,7 @@ describe('ExpressHttpServer unit test', () => {
     const server = new ExpressHttpServer();
     const router = Router.getInstance();
     const spyHandleRequest = jest.spyOn(router, 'handleRequest');
-    server.listen(3000, () => {
+    server.listen(3005, () => {
       return;
     });
     await request(server.getServerInstance()).get('/express-test-error');

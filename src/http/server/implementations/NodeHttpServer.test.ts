@@ -65,7 +65,7 @@ describe('NodeHttpServer unit test', () => {
       },
     ]);
     server.setRouter(router);
-    server.listen(3000, () => {
+    server.listen(3001, () => {
       return;
     });
     await request(server.getServerInstance()).get('/node-test-error');
@@ -82,7 +82,7 @@ describe('NodeHttpServer unit test', () => {
     const server = new NodeHttpServer();
     const router = Router.getInstance();
     const spyHandleRequest = jest.spyOn(router, 'handleRequest');
-    server.listen(3000, () => {
+    server.listen(3002, () => {
       return;
     });
     await request(server.getServerInstance()).get('/node-test-error');
