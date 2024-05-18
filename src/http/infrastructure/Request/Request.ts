@@ -1,4 +1,4 @@
-import { Enum } from '../../types';
+import { Enum } from '../../../types';
 
 export type QueryParams = {
   [key: string]: string | string[];

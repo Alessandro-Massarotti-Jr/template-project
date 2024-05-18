@@ -1,6 +1,6 @@
-import { HandleRequestError } from '../../errors/HandleRequestError';
-import { Enum } from '../../types';
-import { Request } from '../requests/Request';
+import { HandleRequestError } from '../../../errors/HandleRequestError';
+import { Enum } from '../../../types';
+import { Request } from '../Request/Request';
 import { Route } from './Route';
 
 beforeEach(() => {
@@ -31,14 +31,14 @@ describe('Route unit test', () => {
     const route2 = new Route('/teste');
     route2.setEndPoint(Enum.HttpMethod.GET, []);
     route2.setEndPoint(Enum.HttpMethod.POST, [
-      () => {
+      async () => {
         return;
       },
     ]);
 
     const route3 = new Route('/teste');
     route3.setEndPoint(Enum.HttpMethod.GET, [
-      () => {
+      async () => {
         return;
       },
     ]);
