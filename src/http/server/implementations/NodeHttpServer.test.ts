@@ -71,7 +71,7 @@ describe('NodeHttpServer unit test', () => {
     await request(server.getServerInstance()).get('/node-test-error');
     server.close();
     expect(spyHandleRequest).toHaveBeenCalledWith({
-      url: 'http://127.0.0.1:3000/node-test-error',
+      url: 'http://127.0.0.1:3001/node-test-error',
       body: {},
       headers: expect.any(Object),
       method: Enum.HttpMethod.GET,
