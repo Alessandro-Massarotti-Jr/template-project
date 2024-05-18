@@ -21,7 +21,8 @@
   "contributors": [],
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/index.ts",
-    "build": "npx tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
+    "prebuild": "rm -rf ./build",
+    "build": "npx tsc --project tsconfig.json",
     "start": "node build/index.js",
     "prepare": "husky",
     "test": "jest --passWithNoTests --no-cache --silent",
