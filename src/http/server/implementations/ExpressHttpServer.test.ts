@@ -41,14 +41,14 @@ describe('ExpressHttpServer unit test', () => {
     server.close();
 
     expect(spyHandleRequest).toHaveBeenCalledWith({
-      url: 'http://127.0.0.1:3000/express-test?search=teste',
+      url: 'http://127.0.0.1:3003/express-test?search=teste',
       body: {},
       headers: expect.any(Object),
       method: Enum.HttpMethod.GET,
     });
 
     expect(spyHandleRequest).toHaveBeenCalledWith({
-      url: 'http://127.0.0.1:3000/express-test',
+      url: 'http://127.0.0.1:3003/express-test',
       body: { teste: 'teste' },
       headers: expect.any(Object),
       method: Enum.HttpMethod.POST,
@@ -72,7 +72,7 @@ describe('ExpressHttpServer unit test', () => {
     await request(server.getServerInstance()).get('/express-test-error');
     server.close();
     expect(spyHandleRequest).toHaveBeenCalledWith({
-      url: 'http://127.0.0.1:3000/express-test-error',
+      url: 'http://127.0.0.1:3004/express-test-error',
       body: {},
       headers: expect.any(Object),
       method: Enum.HttpMethod.GET,
