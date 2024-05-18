@@ -8,7 +8,7 @@ import {
   GetAllReturnDTO,
   UpdateDTO,
   UpdateReturnDTO,
-} from './ProductRepositoryDTOs';
+} from '../dtos/ProductRepositoryDTOs';
 
 export interface IProductRepository {
   create(data: CreateDTO): CreateReturnDTO;

@@ -1,9 +1,9 @@
 import { ExpressHttpServer } from './ExpressHttpServer';
-import { Router } from '../../routes/Router';
+import { Router } from '../../infrastructure/Router/Router';
 import request from 'supertest';
 import { Enum } from '../../../types';
-import { Request } from '../../requests/Request';
 import { ServerConfigurationError } from '../../../errors/ServerConfigurationError';
+import { Request } from '../../infrastructure/Request/Request';
 
 describe('ExpressHttpServer unit test', () => {
   it('should handle a request and send a response', async () => {
@@ -13,7 +13,7 @@ describe('ExpressHttpServer unit test', () => {
     const spyHandleRequest = jest.spyOn(router, 'handleRequest');
 
     router.get('/express-test', [
-      (request: Request) => {
+      async (request: Request) => {
         request.setResponse({
           httpStatusCode: Enum.HttpStatusCode.OK,
           message: 'success',
@@ -23,7 +23,7 @@ describe('ExpressHttpServer unit test', () => {
     ]);
 
     router.post('/express-test', [
-      (request: Request) => {
+      async (request: Request) => {
         request.setResponse({
           httpStatusCode: Enum.HttpStatusCode.OK,
           message: 'success',

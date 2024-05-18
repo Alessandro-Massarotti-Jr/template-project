@@ -1,8 +1,8 @@
 import { NodeHttpServer } from './NodeHttpServer';
-import { Router } from '../../routes/Router';
+import { Router } from '../../infrastructure/Router/Router';
 import request from 'supertest';
 import { Enum } from '../../../types';
-import { Request } from '../../requests/Request';
+import { Request } from '../../infrastructure/Request/Request';
 
 describe('NodeHttpServer unit test', () => {
   it('should handle a request and send a response', async () => {
@@ -12,7 +12,7 @@ describe('NodeHttpServer unit test', () => {
     const spyHandleRequest = jest.spyOn(router, 'handleRequest');
 
     router.get('/node-test', [
-      (request: Request) => {
+      async (request: Request) => {
         request.setResponse({
           httpStatusCode: Enum.HttpStatusCode.OK,
           message: 'success',
@@ -22,7 +22,7 @@ describe('NodeHttpServer unit test', () => {
     ]);
 
     router.post('/node-test', [
-      (request: Request) => {
+      async (request: Request) => {
         request.setResponse({
           httpStatusCode: Enum.HttpStatusCode.OK,
           message: 'success',

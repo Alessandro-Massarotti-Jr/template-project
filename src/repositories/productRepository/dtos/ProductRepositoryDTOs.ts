@@ -1,5 +1,5 @@
-import { Product } from '../../entities/Product/Product';
-import { Type } from '../../types';
+import { Type } from '../../../types';
+import { Product } from '../../../types/Types';
 
 export type CreateDTO = Type.Product;
 export type CreateReturnDTO = Promise<Product>;

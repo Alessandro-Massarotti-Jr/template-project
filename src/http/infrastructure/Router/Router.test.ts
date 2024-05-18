@@ -1,9 +1,9 @@
-import { DuplicatedPathError } from '../../errors/DuplicatedPathError';
-import { InvalidUrlError } from '../../errors/InvalidUrlError';
-import { RouteMethodNotAllowedError } from '../../errors/RouteMethodNotAllowedError';
-import { RouteNotFoundError } from '../../errors/RouteNotFoundError';
-import { Enum } from '../../types';
-import { Request } from '../requests/Request';
+import { DuplicatedPathError } from '../../../errors/DuplicatedPathError';
+import { InvalidUrlError } from '../../../errors/InvalidUrlError';
+import { RouteMethodNotAllowedError } from '../../../errors/RouteMethodNotAllowedError';
+import { RouteNotFoundError } from '../../../errors/RouteNotFoundError';
+import { Enum } from '../../../types';
+import { Request } from '../Request/Request';
 import { Router } from './Router';
 
 const router = Router.getInstance();
@@ -27,8 +27,19 @@ describe('Router unit test', () => {
     router.get('/user/:userId/', []);
     router.get('/', []);
 
+    router.all('/all', []);
+
     expect(router.getRegisteredPaths()).toEqual([
       '/ [GET]',
+      '/all [CONNECT]',
+      '/all [DELETE]',
+      '/all [GET]',
+      '/all [HEAD]',
+      '/all [OPTIONS]',
+      '/all [PATCH]',
+      '/all [POST]',
+      '/all [PUT]',
+      '/all [TRACE]',
       '/teste [CONNECT]',
       '/teste [DELETE]',
       '/teste [GET]',
@@ -54,7 +65,7 @@ describe('Router unit test', () => {
 
   it('should handle response', async () => {
     router.get('/request', [
-      (request: Request) => {
+      async (request: Request) => {
         request.setResponse({
           data: {},
           httpStatusCode: Enum.HttpStatusCode.CREATED,
@@ -117,7 +128,7 @@ describe('Router unit test', () => {
 
   it('should handle response with params', async () => {
     router.get('/user/:userId/products', [
-      (request: Request) => {
+      async (request: Request) => {
         request.setResponse({
           data: {
             title: 'cellphone',

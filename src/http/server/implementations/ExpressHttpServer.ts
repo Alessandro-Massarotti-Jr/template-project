@@ -3,7 +3,7 @@ import express, { Request, Response, Express } from 'express';
 import { IServer } from '../interfaces/IServer';
 import { CustomError } from '../../../errors/CustomError';
 import { Enum } from '../../../types';
-import { Router } from '../../routes/Router';
+import { Router } from '../../infrastructure/Router/Router';
 import { logger } from '../../../utilities/Logger';
 import { ServerConfigurationError } from '../../../errors/ServerConfigurationError';
 

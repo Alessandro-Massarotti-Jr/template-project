@@ -1,13 +1,14 @@
-import { HandleRequestError } from '../../errors/HandleRequestError';
-import { Enum } from '../../types';
-import { Request, Response } from '../requests/Request';
+import { HandleRequestError } from '../../../errors/HandleRequestError';
+import { Enum } from '../../../types';
+import { RequestHandler } from '../../interfaces/IHttpHandler';
+import { Request, Response } from '../Request/Request';
 
 export class Route {
   private path: string = '';
   private allowedMethods: Enum.HttpMethod[] = [];
   private methodsFunctions: {
     // eslint-disable-next-line no-unused-vars
-    [key in Enum.HttpMethod]?: Function[];
+    [key in Enum.HttpMethod]?: RequestHandler[];
   } = {};
 
   constructor(path: string) {
@@ -25,7 +26,7 @@ export class Route {
     this.path = rawPath;
   }
 
-  public setEndPoint(method: Enum.HttpMethod, callbacks: Function[]): void {
+  public setEndPoint(method: Enum.HttpMethod, callbacks: RequestHandler[]): void {
     if (!this.allowedMethods.includes(method)) {
       this.allowedMethods.push(method);
     }
