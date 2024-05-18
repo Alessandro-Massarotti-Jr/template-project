@@ -1,7 +1,7 @@
 import { ProductMapper } from '../../../entities/Product/ProductMapper';
 import { CustomError } from '../../../errors/CustomError';
 import { Type } from '../../../types';
-import { IProductRepository } from '../IProductRepository';
+import { IProductRepository } from '../interfaces/IProductRepository';
 import {
   CreateReturnDTO,
   FindByIdDTO,
@@ -12,7 +12,7 @@ import {
   DeleteReturnDTO,
   GetAllReturnDTO,
   CreateDTO,
-} from '../ProductRepositoryDTOs';
+} from '../dtos/ProductRepositoryDTOs';
 import { CreateProductError } from '../errors/CreateProductError';
 import { DeleteProductError } from '../errors/DeleteProductError';
 import { FindProductError } from '../errors/FindProductError';

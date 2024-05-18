@@ -1,4 +1,4 @@
-import { Router } from '../../routes/Router';
+import { Router } from '../../infrastructure/Router/Router';
 import * as http from 'http';
 
 export interface IServer {

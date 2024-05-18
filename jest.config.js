@@ -21,7 +21,9 @@ module.exports = {
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: [
-    'src/**/*.{ts,tsx}'
+    'src/**/*.{ts,tsx}',
+    '!src/**/interfaces/*',
+    '!src/**/dtos/*',
   ],
 
   // The directory where Jest should output its coverage files
@@ -32,7 +34,8 @@ module.exports = {
   '\\\\node_modules\\\\', 
   'server.ts', 
   'index.ts',
-  'src/utilities/*'],
+  'src/utilities/*',
+],
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: 'v8',

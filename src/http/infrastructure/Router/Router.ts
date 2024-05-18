@@ -1,11 +1,12 @@
-import { DuplicatedPathError } from '../../errors/DuplicatedPathError';
-import { InvalidUrlError } from '../../errors/InvalidUrlError';
-import { RouteMethodNotAllowedError } from '../../errors/RouteMethodNotAllowedError';
-import { RouteNotFoundError } from '../../errors/RouteNotFoundError';
-import { Enum } from '../../types';
-import { logger } from '../../utilities/Logger';
-import { Body, Headers, Request, Response } from '../requests/Request';
-import { Route } from './Route';
+import { DuplicatedPathError } from '../../../errors/DuplicatedPathError';
+import { InvalidUrlError } from '../../../errors/InvalidUrlError';
+import { RouteMethodNotAllowedError } from '../../../errors/RouteMethodNotAllowedError';
+import { RouteNotFoundError } from '../../../errors/RouteNotFoundError';
+import { Enum } from '../../../types';
+import { logger } from '../../../utilities/Logger';
+import { RequestHandler } from '../../interfaces/IHttpHandler';
+import { Body, Headers, Request, Response } from '../Request/Request';
+import { Route } from '../Route/Route';
 
 type HandleRequestDTO = {
   method: Enum.HttpMethod;
@@ -33,7 +34,7 @@ export class Router {
     return this.instance;
   }
 
-  private addRoute(method: Enum.HttpMethod, path: string, callbacks: Function[]) {
+  private addRoute(method: Enum.HttpMethod, path: string, callbacks: RequestHandler[]) {
     const parsedPath = this.parsePath(path);
     const genericPath = this.sanitazePathParams(parsedPath);
     if (this.registeredPaths.includes(`${genericPath} [${method}]`)) {
@@ -63,38 +64,44 @@ export class Router {
     return path.replace(/:[a-zA-Z0-9_]+/g, '{param}');
   }
 
-  public get(path: string, callbacks: Function[]) {
+  public all(path: string, callbacks: RequestHandler[]) {
+    for (const method in Enum.HttpMethod) {
+      this.addRoute(method as Enum.HttpMethod, path, callbacks);
+    }
+  }
+
+  public get(path: string, callbacks: RequestHandler[]) {
     this.addRoute(Enum.HttpMethod.GET, path, callbacks);
   }
 
-  public post(path: string, callbacks: Function[]) {
+  public post(path: string, callbacks: RequestHandler[]) {
     this.addRoute(Enum.HttpMethod.POST, path, callbacks);
   }
 
-  public put(path: string, callbacks: Function[]) {
+  public put(path: string, callbacks: RequestHandler[]) {
     this.addRoute(Enum.HttpMethod.PUT, path, callbacks);
   }
-  public delete(path: string, callbacks: Function[]) {
+  public delete(path: string, callbacks: RequestHandler[]) {
     this.addRoute(Enum.HttpMethod.DELETE, path, callbacks);
   }
 
-  public patch(path: string, callbacks: Function[]) {
+  public patch(path: string, callbacks: RequestHandler[]) {
     this.addRoute(Enum.HttpMethod.PATCH, path, callbacks);
   }
 
-  public options(path: string, callbacks: Function[]) {
+  public options(path: string, callbacks: RequestHandler[]) {
     this.addRoute(Enum.HttpMethod.OPTIONS, path, callbacks);
   }
 
-  public head(path: string, callbacks: Function[]) {
+  public head(path: string, callbacks: RequestHandler[]) {
     this.addRoute(Enum.HttpMethod.HEAD, path, callbacks);
   }
 
-  public connect(path: string, callbacks: Function[]) {
+  public connect(path: string, callbacks: RequestHandler[]) {
     this.addRoute(Enum.HttpMethod.CONNECT, path, callbacks);
   }
 
-  public trace(path: string, callbacks: Function[]) {
+  public trace(path: string, callbacks: RequestHandler[]) {
     this.addRoute(Enum.HttpMethod.TRACE, path, callbacks);
   }
 
