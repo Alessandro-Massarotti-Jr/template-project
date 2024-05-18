@@ -1,6 +1,6 @@
 name: Validations
 
-run-name: Validations started by @${{ github.actor }} on ${{github.ref_name}}
+run-name: Validations started by @${{ github.actor }} on ${{github.ref}}
 
 on:
   pull_request:
