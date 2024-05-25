@@ -1,0 +1,31 @@
+name: Release new version
+
+run-name: Release started by @${{ github.actor }}
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up git
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "bot"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: release a new version
+        run: |
+          npm run release
+          git checkout develop
+          git rebase origin/main
+          git push --force-with-lease
