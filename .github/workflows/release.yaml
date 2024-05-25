@@ -49,4 +49,4 @@ jobs:
             -d '{"event": "APPROVE"}' \
             "https://api.github.com/repos/${{github.repository_owner}}/develop/pulls/$PR_NUMBER_DEVELOP/reviews"
           sleep 5
-          gh pr merge $PR_NUMBER --rebase --admin
+          gh pr merge $PR_NUMBER_DEVELOP --rebase --admin
