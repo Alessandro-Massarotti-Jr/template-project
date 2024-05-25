@@ -33,8 +33,6 @@ jobs:
           gh pr create --base main --head release-${VERSION} --title "Release ${VERSION}" --body "Automated release of version ${VERSION}"
           sleep 5
           PR_NUMBER=$(gh pr list --state open --base main --search "release-${VERSION}" --json number --jq '.[0].number')
-          echo $PR_NUMBER;
-          echo "https://api.github.com/repos/${{github.repository}}/pulls/$PR_NUMBER/reviews"
           curl -X POST \
             -H "Authorization: token ${{secrets.GIT_TOKEN}}" \
             -H "Accept: application/vnd.github.v3+json" \
@@ -45,7 +43,9 @@ jobs:
           sleep 5
           git checkout main
           git pull
+          git rebase origin/main
           git push --tags
           git checkout develop
+          git pull
           git rebase origin/main
           git push --force-with-lease
