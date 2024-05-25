@@ -4,7 +4,7 @@ run-name: Automatic Pull Request started by @${{ github.actor }}
 
 on:
   push:
-    branchs:
+    branches:
       - develop
 
 jobs:
