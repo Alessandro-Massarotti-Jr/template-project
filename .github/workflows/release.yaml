@@ -41,5 +41,12 @@ jobs:
           sleep 5
           gh pr merge $PR_NUMBER --rebase --delete-branch --admin
           sleep 5
-          git reset --hard  origin/main
-          git push origin/develop
+          gh pr create --base develop --head main --title "Release ${VERSION}" --body "Automated release of version ${VERSION}"
+          PR_NUMBER=$(gh pr list --state open --base main --search "release-${VERSION}" --json number --jq '.[0].number')
+          curl -X POST \
+            -H "Authorization: token ${{secrets.GIT_TOKEN}}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            -d '{"event": "APPROVE"}' \
+            "https://api.github.com/repos/${{github.repository}}/pulls/$PR_NUMBER/reviews"
+          sleep 5
+          gh pr merge $PR_NUMBER --rebase --admin
