@@ -31,6 +31,7 @@ jobs:
           git checkout -b release-${VERSION}
           git push origin release-${VERSION}
           gh pr create --base main --head release-${VERSION} --title "Release ${VERSION}" --body "Automated release of version ${VERSION}"
+          sleep 5
           PR_NUMBER=$(gh pr list --state open --base main --search "release-${VERSION}" --json number --jq '.[0].number')
           curl -X POST \
             -H "Authorization: token ${{secrets.GIT_TOKEN}}" \
