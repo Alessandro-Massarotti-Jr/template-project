@@ -3,9 +3,9 @@ name: Auto Pull Request
 run-name: Automatic Pull Request started by @${{ github.actor }}
 
 on:
-  push:
-    branches:
-      - develop
+  pull_request:
+    types:
+      - closed
 
 jobs:
   check_if_pull_request_already_exists:
@@ -14,7 +14,7 @@ jobs:
       need-open-pull-request: ${{ steps.check_if_pull_request_already_exists.outputs.NEEDS_PULL_REQUEST }}
     steps:
       - name: Check if exists open pull request from develop to main
-        id: check_existing_pr
+        id: check_if_pull_request_already_exists
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -27,14 +27,12 @@ jobs:
 
           if ((pull_requests > 0)); then
             echo "NEEDS_PULL_REQUEST=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "NEEDS_PULL_REQUEST=true" >> "$GITHUB_OUTPUT"
           fi
 
-  check_and_create_pr:
+  create_pull_request_to_main:
     needs:
       - check_if_pull_request_already_exists
-    if: ${{ needs.check_if_pull_request_already_exists.outputs.need-open-pull-request }}
+    if: ${{ !needs.check_existing_pr.outputs.need-open-pull-request && github.event.pull_request.merged && github.event.pull_request.base.ref == 'develop'  }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
