@@ -29,7 +29,7 @@ jobs:
           npm run release
           VERSION=$(node -p "require('./package.json').version")
           git checkout -b release-${VERSION}
-          git push origin release-${VERSION}
+          git push --follow-tags origin release-${VERSION}
           gh pr create --base main --head release-${VERSION} --title "Release ${VERSION}" --body "Automated release of version ${VERSION}"
           sleep 5
           PR_NUMBER=$(gh pr list --state open --base main --search "release-${VERSION}" --json number --jq '.[0].number')
@@ -41,11 +41,8 @@ jobs:
           sleep 5
           gh pr merge $PR_NUMBER --rebase --delete-branch --admin
           sleep 5
-          git checkout main
-          git pull
-          git rebase origin/main
-          git push --tags
+          git reset --hard  origin/main
           git checkout develop
-          git pull
+          git reset --hard  origin/develop
           git rebase origin/main
           git push --force-with-lease
