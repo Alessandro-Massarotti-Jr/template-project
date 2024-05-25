@@ -42,6 +42,7 @@ jobs:
           gh pr merge $PR_NUMBER --rebase --delete-branch --admin
           sleep 5
           gh pr create --base develop --head main --title "Release ${VERSION}" --body "Automated release of version ${VERSION}"
+          sleep 5
           PR_NUMBER_DEVELOP=$(gh pr list --state open --base develop --search "main" --json number --jq '.[0].number')
           curl -X POST \
             -H "Authorization: token ${{secrets.GIT_TOKEN}}" \
