@@ -1,6 +1,6 @@
 {
   "name": "template-project",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "main": "index.js",
   "description": "template project for typescript projects",
   "keywords": [
