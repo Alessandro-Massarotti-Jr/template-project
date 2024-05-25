@@ -1,4 +1,4 @@
-name: Auto Pull Request
+name: Automatic Pull Request
 
 run-name: Automatic Pull Request started by @${{ github.actor }}
 
