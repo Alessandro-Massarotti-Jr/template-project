@@ -48,6 +48,6 @@ jobs:
             -H "Authorization: token ${{secrets.GIT_TOKEN}}" \
             -H "Accept: application/vnd.github.v3+json" \
             -d '{"event": "APPROVE"}' \
-            "https://api.github.com/repos/${{github.repository_owner}}/develop/pulls/$PR_NUMBER_DEVELOP/reviews"
+            "https://api.github.com/repos/${{github.repository}}/pulls/$PR_NUMBER_DEVELOP/reviews"
           sleep 5
           gh pr merge $PR_NUMBER_DEVELOP --rebase --admin
