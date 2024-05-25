@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -32,7 +33,7 @@ jobs:
           git push origin release-${VERSION}
           gh pr create --base main --head release-${VERSION} --title "Release ${VERSION}" --body "Automated release of version ${VERSION}"
           PR_NUMBER=$(gh pr list --state open --base main --search "release-${VERSION}" --json number --jq '.[0].number')
-          echo "GH_TOKEN=${{ secrets.GIT_TOKEN }}" >> $GITHUB_ENV
+          echo "::set-env name=GH_TOKEN::${{secrets.GIT_TOKEN}}"
           gh pr review $PR_NUMBER --approve
           gh pr merge $PR_NUMBER --rebase --delete-branch --admin
           git checkout main
