@@ -43,7 +43,7 @@ jobs:
           sleep 5
           gh pr create --base develop --head main --title "Release ${VERSION}" --body "Automated release of version ${VERSION}"
           sleep 5
-          PR_NUMBER_DEVELOP=$(gh pr list --state open --base develop --search "main" --json number --jq '.[0].number')
+          PR_NUMBER_DEVELOP=$(gh pr list --state open --base develop --head main --json number --jq '.[0].number')
           curl -X POST \
             -H "Authorization: token ${{secrets.GIT_TOKEN}}" \
             -H "Accept: application/vnd.github.v3+json" \
