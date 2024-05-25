@@ -27,12 +27,14 @@ jobs:
 
           if ((pull_requests > 0)); then
             echo "NEEDS_PULL_REQUEST=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "NEEDS_PULL_REQUEST=true" >> "$GITHUB_OUTPUT"
           fi
 
   check_and_create_pr:
     needs:
       - check_if_pull_request_already_exists
-    if: ${{ !needs.check_if_pull_request_already_exists.outputs.need-open-pull-request }}
+    if: ${{ needs.check_if_pull_request_already_exists.outputs.need-open-pull-request }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
