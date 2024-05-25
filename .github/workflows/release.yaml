@@ -26,7 +26,14 @@ jobs:
       - name: release a new version
         run: |
           npm run release
-          git push
+          VERSION=$(node -p "require('./package.json').version")
+          git checkout -b release-${VERSION}
+          git push origin release-${VERSION}
+          gh pr create --base main --head release-${VERSION} --title "Release ${VERSION}" --body "Automated release of version ${VERSION}"
+          gh pr merge --auto --squash --merge --delete-branch
+          git checkout main
+          git pull
+          git push --tags
           git checkout develop
           git rebase origin/main
           git push --force-with-lease
