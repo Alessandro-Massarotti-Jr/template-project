@@ -28,19 +28,8 @@ jobs:
         run: |
           npm run release
           VERSION=$(node -p "require('./package.json').version")
-          git checkout -b release-${VERSION}
-          git push origin release-${VERSION}
-          gh pr create --base main --head release-${VERSION} --title "Release ${VERSION}" --body "Automated release of version ${VERSION}"
-          PR_NUMBER=$(gh pr list --state open --base main --search "release-${VERSION}" --json number --jq '.[0].number')
-          curl -X POST \
-            -H "Authorization: token $GH_TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            -d '{"event": "APPROVE"}' \
-            "https://api.github.com/repos/$(echo ${{ github.repository }} | cut -d '/' -f 2)/pulls/$PR_NUMBER/reviews"
-          gh pr merge $PR_NUMBER --rebase --delete-branch --admin
-          git checkout main
-          git pull
           git push --tags
+          git pull
           git checkout develop
           git rebase origin/main
           git push --force-with-lease
