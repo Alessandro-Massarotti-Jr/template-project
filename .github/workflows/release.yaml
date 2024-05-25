@@ -26,6 +26,7 @@ jobs:
       - name: release a new version
         run: |
           npm run release
+          git push
           git checkout develop
           git rebase origin/main
           git push --force-with-lease
