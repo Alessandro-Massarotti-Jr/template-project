@@ -41,9 +41,12 @@ jobs:
           sleep 5
           gh pr merge $PR_NUMBER --rebase --delete-branch --admin
           sleep 5
-          git reset --hard  origin/main
-          git pull
+          git checkout main
+          git fetch origin
+          git reset --hard origin/main
+          git pull --rebase
           git checkout develop
-          git reset --hard  origin/develop
+          git fetch origin
+          git reset --hard origin/develop
           git rebase origin/main
           git push --force-with-lease
