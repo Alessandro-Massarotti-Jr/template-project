@@ -33,7 +33,7 @@ jobs:
           gh pr create --base main --head release-${VERSION} --title "Release ${VERSION}" --body "Automated release of version ${VERSION}"
           PR_NUMBER=$(gh pr list --state open --base main --search "release-${VERSION}" --json number --jq '.[0].number')
           gh pr review $PR_NUMBER --approve
-          gh pr merge $PR_NUMBER --rebase --delete-branch --admin
+          gh pr merge $PR_NUMBER --rebase --delete-branch --auto --admin
           git checkout main
           git pull
           git push --tags
