@@ -179,6 +179,6 @@ export class Router {
   }
 
   public getRegisteredPaths(): string[] {
-    return this.registeredPaths.sort();
+    return this.registeredPaths.sort((a: string, b: string) => a.localeCompare(b));
   }
 }
