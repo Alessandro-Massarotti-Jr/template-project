@@ -1,0 +1,58 @@
+name: Auto Pull Request
+
+run-name: Automatic Pull Request started by @${{ github.actor }}
+
+on:
+  push:
+    branchs:
+      - develop
+
+jobs:
+  check_if_pull_request_already_exists:
+    runs-on: ubuntu-latest
+    outputs:
+      need-open-pull-request: ${{ steps.check_if_pull_request_already_exists.outputs.NEEDS_PULL_REQUEST }}
+    steps:
+      - name: Check if exists open pull request from develop to main
+        id: check_existing_pr
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pull_requests=$(gh pr list \
+            --repo "$GITHUB_REPOSITORY" \
+            --head 'develop' \
+            --base 'main' \
+            --json title \
+            --jq 'length')
+
+          if ((pull_requests > 0)); then
+            echo "NEEDS_PULL_REQUEST=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  check_and_create_pr:
+    needs:
+      - check_if_pull_request_already_exists
+    if: ${{ !needs.check_if_pull_request_already_exists.outputs.need-open-pull-request }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up git
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "bot"
+
+      - name: Create Pull Request from develop to main
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: pr } = await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "Automatic Pull Request from Develop to Main",
+              head: "develop",
+              base: "main",
+              body: "Auto PR to main",
+            });
