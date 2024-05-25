@@ -31,7 +31,9 @@ jobs:
           git checkout -b release-${VERSION}
           git push origin release-${VERSION}
           gh pr create --base main --head release-${VERSION} --title "Release ${VERSION}" --body "Automated release of version ${VERSION}"
-          gh pr merge --auto --squash --merge --delete-branch
+          PR_NUMBER=$(gh pr list --state open --base main --search "release-${VERSION}" --json number --jq '.[0].number')
+          gh pr wait $PR_NUMBER
+          gh pr merge $PR_NUMBER --rebase --delete-branch
           git checkout main
           git pull
           git push --tags
