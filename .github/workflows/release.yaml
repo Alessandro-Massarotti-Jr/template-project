@@ -10,11 +10,16 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    concurrency:
+      group: release
+      cancel-in-progress: false
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Set up git
         run: |
@@ -24,30 +29,33 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Install standart version
+        run: npm install -g standard-version
+
+      - name: Create `.versionrc.json`
+        run: |
+          echo '{
+            "tagPrefix": "",
+            "types": [
+              { "type": "feat", "section": "Features", "hidden": false },
+              { "type": "fix", "section": "Bug Fixes", "hidden": false },
+              { "type": "docs", "section": "Documentation", "hidden": false},
+              { "type": "style", "section": "Styles", "hidden": false },
+              { "type": "refactor", "section": "Code Refactoring", "hidden": false },
+              { "type": "perf", "section": "Performance Improvements", "hidden": false },
+              { "type": "test", "section": "Tests", "hidden": false },
+              { "type": "build", "section": "Build System", "hidden": false },
+              { "type": "ci", "section": "Continuous Integration", "hidden": false },
+              { "type": "chore", "section": "Chores", "hidden": false },
+              { "type": "revert", "section": "Reverts", "hidden": false }
+            ]
+          }' > .versionrc.json
+
       - name: release a new version
+        id: release-version
         run: |
           npm run release
-          VERSION=$(node -p "require('./package.json').version")
-          git checkout -b release-${VERSION}
-          git push --follow-tags origin release-${VERSION}
-          gh pr create --base main --head release-${VERSION} --title "Release ${VERSION}" --body "Automated release of version ${VERSION}"
-          sleep 5
-          PR_NUMBER=$(gh pr list --state open --base main --search "release-${VERSION}" --json number --jq '.[0].number')
-          curl -X POST \
-            -H "Authorization: token ${{secrets.GIT_TOKEN}}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            -d '{"event": "APPROVE"}' \
-            "https://api.github.com/repos/${{github.repository}}/pulls/$PR_NUMBER/reviews"
-          sleep 5
-          gh pr merge $PR_NUMBER --rebase --delete-branch --admin
-          sleep 5
-          gh pr create --base develop --head main --title "Release ${VERSION}" --body "Automated release of version ${VERSION}"
-          sleep 5
-          PR_NUMBER_DEVELOP=$(gh pr list --state open --base develop --head main --json number --jq '.[0].number')
-          curl -X POST \
-            -H "Authorization: token ${{secrets.GIT_TOKEN}}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            -d '{"event": "APPROVE"}' \
-            "https://api.github.com/repos/${{github.repository}}/pulls/$PR_NUMBER_DEVELOP/reviews"
-          sleep 5
-          gh pr merge $PR_NUMBER_DEVELOP --rebase --admin
+          git push --follow-tags
+
+      - name: Clean up `.versionrc.json`
+        run: rm .versionrc.json
