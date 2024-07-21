@@ -33,7 +33,6 @@
     "precommit": "npx husky install",
     "commit": "cz",
     "lint": "eslint src/**/*.{ts,tsx}",
-    "release": "standard-version --no-verify",
     "fix": "prettier . --write eslint src/**/*.{ts,tsx} --fix"
   },
   "husky": {
