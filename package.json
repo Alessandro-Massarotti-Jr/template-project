@@ -1,6 +1,6 @@
 {
   "name": "template-project",
-  "version": "1.1.14",
+  "version": "1.0.0",
   "main": "index.js",
   "description": "template project for typescript projects",
   "keywords": [
@@ -67,7 +67,6 @@
     "prettier": "^3.2.5",
     "prisma": "^4.16.2",
     "prisma-erd-generator": "^1.11.2",
-    "standard-version": "^9.5.0",
     "supertest": "^7.0.0",
     "ts-node-dev": "^2.0.0",
     "tsx": "^3.14.0",
