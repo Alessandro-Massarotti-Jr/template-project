@@ -58,5 +58,7 @@ jobs:
           npx standard-version --no-verify
           latest_tag=$(git describe --tags --abbrev=0)
           latest_commit=$(git log -1 --format=%B)
+          git tag -d "$latest_tag"
           git commit --amend -m "$latest_commit [skip ci]" -m "Release new tag version"
+          git tag "$latest_tag"
           git push --follow-tags
