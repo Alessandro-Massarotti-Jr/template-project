@@ -55,7 +55,7 @@ jobs:
       - name: release a new version
         id: release-version
         run: |
-          npm run release
+          npx standard-version --no-verify
           git push --follow-tags
 
       - name: Clean up `.versionrc.json`
