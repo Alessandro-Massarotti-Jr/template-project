@@ -60,5 +60,5 @@ jobs:
           latest_commit=$(git log -1 --format=%B)
           git tag -d "$latest_tag"
           git commit --amend -m "$latest_commit [skip ci]" -m "Release new tag version"
-          git tag "$latest_tag"
+          git tag -a "$latest_tag" -m "chore(release): $latest_tag"
           git push --follow-tags
