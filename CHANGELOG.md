@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.5](https://github.com/Alessandro-Massarotti-Jr/template-project/compare/1.1.2...1.1.5) (2024-07-22)
+
+
+### Chores
+
+* **release:** 1.1.3 [skip ci] ([c9b8e09](https://github.com/Alessandro-Massarotti-Jr/template-project/commit/c9b8e092db5acf3ba959a12c017bc35e7dae26b8))
+* **release:** 1.1.4 [skip ci] ([11edd2d](https://github.com/Alessandro-Massarotti-Jr/template-project/commit/11edd2d43b8ca1e3d28832d7f4d19ee035135f03))
+
+
+### Build System
+
+* **github:** bot update repository workflows ([b0d1907](https://github.com/Alessandro-Massarotti-Jr/template-project/commit/b0d19079c3a4aca50536926ab963a1e874ee3100))
+* **github:** bot update repository workflows ([c0394f0](https://github.com/Alessandro-Massarotti-Jr/template-project/commit/c0394f04d313d0e2aedab54d26c5be439d83d23d))
+* **github:** bot update repository workflows ([60901a2](https://github.com/Alessandro-Massarotti-Jr/template-project/commit/60901a2500ba42024afc0b3f361086450d705d06))
+* **github:** bot update repository workflows ([f5851c6](https://github.com/Alessandro-Massarotti-Jr/template-project/commit/f5851c6f25e10238736f89af43173bef0206da77))
+* **github:** bot update repository workflows ([8d357f1](https://github.com/Alessandro-Massarotti-Jr/template-project/commit/8d357f13aba736a1700d4fba89bbcf4ccc03b71b))
+* **github:** bot update repository workflows ([03fda42](https://github.com/Alessandro-Massarotti-Jr/template-project/commit/03fda42f3273ee01c6e5f32b5a4885fe423704c0))
+
 ### [1.1.4](https://github.com/Alessandro-Massarotti-Jr/template-project/compare/1.1.2...1.1.4) (2024-07-22)
 
 
