@@ -17,16 +17,16 @@
     "email": "alemassajr@hotmail.com"
   },
   "engines": {
-    "node": ">=20.3.1",
+    "node": ">=20.16.0",
     "npm": ">=9.1.1"
   },
   "contributors": [],
   "scripts": {
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/index.ts",
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn --env-file=.env src/index.ts",
     "prebuild": "rm -rf ./build",
     "build": "npx tsc --project tsconfig.json",
     "prestart": "npm run build",
-    "start": "node build/index.js",
+    "start": "node --env-file=.env build/index.js",
     "prepare": "husky",
     "test": "jest --passWithNoTests --no-cache --silent --setTimeout=45000",
     "test-coverage": "jest --coverageReporters=text --passWithNoTests --no-cache --silent --setTimeout=45000",
@@ -74,7 +74,6 @@
   "dependencies": {
     "@prisma/client": "^4.16.2",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
     "express": "^4.19.2"
   }
 }
