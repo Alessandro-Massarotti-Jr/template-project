@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import { ExpressHttpServer } from './http/server/implementations/ExpressHttpServer';
 import { router } from './http/routes';
 
