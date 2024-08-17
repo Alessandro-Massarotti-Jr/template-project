@@ -21,7 +21,7 @@ import { ProductAlreadyExistsError } from '../errors/ProductAlreadyExistsError';
 import { UpdateProductError } from '../errors/UpdateProductError';
 
 export class MemoryProductRepository implements IProductRepository {
-  public static instance?: IProductRepository;
+  private static instance?: IProductRepository;
   private products: Type.Product[] = [];
 
   private constructor() {

@@ -26,7 +26,7 @@ export class ExpressHttpServer implements IServer {
         const response = await this.router.handleRequest({
           url: `http://${req.headers.host}${req.url}`,
           body: req.body,
-          headers: req.headers as any,
+          headers: req.headers,
           method: req.method as Enum.HttpMethod,
         });
 

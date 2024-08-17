@@ -28,7 +28,7 @@ export class NodeHttpServer implements IServer {
           const response = await this.router.handleRequest({
             url: `http://${req.headers.host}${req.url}`,
             body: bodyData ? JSON.parse(bodyData) : {},
-            headers: req.headers as any,
+            headers: req.headers,
             method: req.method as Enum.HttpMethod,
           });
           res.writeHead(response.httpStatusCode, { 'Content-Type': 'application/json' });

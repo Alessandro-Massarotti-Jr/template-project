@@ -13,7 +13,7 @@ export type Body = {
 };
 
 export type Headers = {
-  [key: string]: string;
+  [key: string]: string | string[] | undefined;
 };
 
 export type RequetDTO = {
