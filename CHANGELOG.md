@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.6](https://github.com/Alessandro-Massarotti-Jr/template-project/compare/1.1.5...1.1.6) (2024-08-17)
+
+
+### Code Refactoring
+
+* **package.json:** remove dotenv dependency ([3a4bfc0](https://github.com/Alessandro-Massarotti-Jr/template-project/commit/3a4bfc061e9218c08641f5bc9543c96e4923cb78))
+
 ### [1.1.5](https://github.com/Alessandro-Massarotti-Jr/template-project/compare/1.1.2...1.1.5) (2024-07-22)
 
 
