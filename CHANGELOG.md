@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.7](https://github.com/Alessandro-Massarotti-Jr/template-project/compare/1.1.6...1.1.7) (2024-08-17)
+
+
+### Build System
+
+* **dependencies:** update project dependencies ([eff4589](https://github.com/Alessandro-Massarotti-Jr/template-project/commit/eff4589e39a325076b8395a9fc02371fa5bbbc26))
+
+
+### Code Refactoring
+
+* **sonnar-cloud:** fix sonnar-cloud code-smells ([0c7df66](https://github.com/Alessandro-Massarotti-Jr/template-project/commit/0c7df665a88e31cc7e4df56b6b234c68d8a0b031))
+
 ### [1.1.6](https://github.com/Alessandro-Massarotti-Jr/template-project/compare/1.1.5...1.1.6) (2024-08-17)
 
 
