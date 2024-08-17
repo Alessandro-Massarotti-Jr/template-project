@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.8](https://github.com/Alessandro-Massarotti-Jr/template-project/compare/1.1.7...1.1.8) (2024-08-17)
+
+
+### Code Refactoring
+
+* **router:** change saniteze params regex ([8224a97](https://github.com/Alessandro-Massarotti-Jr/template-project/commit/8224a97722b79728e39c0d80ff58249eef2e987d))
+* **router:** reduce ger-route function complexy ([3edf346](https://github.com/Alessandro-Massarotti-Jr/template-project/commit/3edf3464f3791c9c010eda2f0ddb72505a55d611))
+
 ### [1.1.7](https://github.com/Alessandro-Massarotti-Jr/template-project/compare/1.1.6...1.1.7) (2024-08-17)
 
 
