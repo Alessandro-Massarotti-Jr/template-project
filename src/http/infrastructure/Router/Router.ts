@@ -61,7 +61,7 @@ export class Router {
   }
 
   private sanitazePathParams(path: string): string {
-    return path.replace(/:[a-zA-Z0-9_]+/g, '{param}');
+    return path.replace(/:\w+/g, '{param}');
   }
 
   public all(path: string, callbacks: RequestHandler[]) {
