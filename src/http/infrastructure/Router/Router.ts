@@ -17,7 +17,7 @@ type HandleRequestDTO = {
 
 export class Router {
   // eslint-disable-next-line no-use-before-define
-  public static instance: Router;
+  private static instance: Router;
   private routes: Route[] = [];
   private registeredPaths: string[] = [];
 

@@ -2,16 +2,7 @@ import crypto from 'node:crypto';
 import { InvalidUuidError } from '../errors/InvalidUuidError';
 
 export abstract class Entity {
-  protected setCreatedAt(dateToParse?: string | number | Date) {
-    if (!dateToParse) {
-      return new Date();
-    }
-    if (isNaN(new Date(dateToParse).getTime())) {
-      return new Date();
-    }
-    return new Date(dateToParse);
-  }
-  protected setUpdatedAt(dateToParse?: string | number | Date) {
+  protected setCurrentDate(dateToParse?: string | number | Date): Date {
     if (!dateToParse) {
       return new Date();
     }
@@ -21,7 +12,7 @@ export abstract class Entity {
     return new Date(dateToParse);
   }
 
-  protected setId(id?: string) {
+  protected setId(id?: string): string {
     if (!id) {
       return crypto.randomUUID();
     }

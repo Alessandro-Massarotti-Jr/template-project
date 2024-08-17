@@ -17,8 +17,8 @@ export class Product extends Entity {
     this.description = props.description;
     this.value = props.value ?? 0;
     this.quantity = props.quantity ?? 0;
-    this.createdAt = this.setCreatedAt(props.createdAt);
-    this.updatedAt = this.setUpdatedAt(props.updatedAt);
+    this.createdAt = this.setCurrentDate(props.createdAt);
+    this.updatedAt = this.setCurrentDate(props.updatedAt);
   }
 
   public getAllStockValue() {
