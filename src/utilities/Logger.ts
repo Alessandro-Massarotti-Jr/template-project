@@ -31,15 +31,9 @@ class Logger {
   private async writeLog(message: string, level: string) {
     const logsDirectory = './logs';
     const filePath = `./logs/${level}-logs.log`;
-    const log = `[${level}][${new Date().toISOString()}][${process.pid}] - ${message}`;
-    try {
-      await fs.promises.mkdir(logsDirectory, { recursive: true });
-      const data = await fs.promises.readFile(filePath, 'utf8');
-      const novoConteudo = `${data.trim()}\n${log}`;
-      await fs.promises.writeFile(filePath, novoConteudo);
-    } catch (error) {
-      await fs.promises.writeFile(filePath, log);
-    }
+    const log = `[${level}][${new Date().toISOString()}][${process.pid}] - ${message}\n`;
+    await fs.promises.mkdir(logsDirectory, { recursive: true });
+    await fs.promises.appendFile(filePath, log);
   }
 }
 
