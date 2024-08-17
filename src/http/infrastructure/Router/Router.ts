@@ -121,29 +121,18 @@ export class Router {
     if (currentRoute) {
       return currentRoute;
     }
-    const urlParts = requestPath.split('/');
-    for (const route of this.routes) {
-      const routePathParts = route.getPath().split('/');
-      if (routePathParts.length !== urlParts.length) {
-        continue;
-      }
-      let isMatch = true;
-      for (let i = 0; i < routePathParts.length; i++) {
-        if (routePathParts[i].startsWith(':')) {
-          continue;
-        }
-        if (routePathParts[i] !== urlParts[i]) {
-          isMatch = false;
-          break;
-        }
-      }
-      if (isMatch) {
-        currentRoute = route;
-        break;
-      }
-    }
+    return (
+      this.routes.find((route) => this.routeWithParamIsMatch(requestPath, route.getPath())) ?? null
+    );
+  }
 
-    return currentRoute || null;
+  private routeWithParamIsMatch(requestPath: string, routePath: string): boolean {
+    const urlParts = requestPath.split('/');
+    const routePathParts = routePath.split('/');
+    if (routePathParts.length !== urlParts.length) {
+      return false;
+    }
+    return routePathParts.every((part, index) => part.startsWith(':') || part === urlParts[index]);
   }
 
   public async handleRequest(data: HandleRequestDTO): Promise<Response> {
