@@ -1,0 +1,8 @@
+/node_modules
+/build
+/logs
+/.husky
+/.github
+/tests
+Dockerfile
+Dockerfile.dev
